@@ -1,0 +1,197 @@
+\documentclass[letterpaper,10pt]{article}
+
+\usepackage{graphicx}                                        
+\usepackage{amssymb}                                         
+\usepackage{amsmath}                                         
+\usepackage{amsthm}                                          
+
+\usepackage{alltt}                                           
+\usepackage{float}
+\usepackage{color}
+\usepackage{url}
+
+\usepackage{balance}
+\usepackage[TABBOTCAP, tight]{subfigure}
+\usepackage{enumitem}
+\usepackage{pstricks, pst-node}
+
+\usepackage{geometry}
+\geometry{textheight=8.5in, textwidth=6in}
+
+\newcommand{\cred}[1]{{\color{red}#1}}
+\newcommand{\cblue}[1]{{\color{blue}#1}}
+
+\newcommand{\toc}{\tableofcontents}
+
+\usepackage{hyperref}
+
+\def\name{Drake Bridgewater \\ Jordan Bayles}
+\def\title{Programming Assignment 1}
+\def\subject{CS }
+\def\courseNumber{ 325 }
+\def\courseName{ANALYSIS OF ALGORITHMS}
+\def\courseInfo{WINTER 2014 }%Class Time: MWF X-X:XX AM}
+\def\supervisor{Xiaoli \textsc{Fern}} % Supervisor's Name
+
+
+%pull in the necessary preamble matter for pygments output
+%\input{pygments.tex}
+
+%% The following metadata will show up in the PDF properties
+ \hypersetup{
+   colorlinks = false,
+   urlcolor = black,
+   pdfauthor = {\name},
+   pdfkeywords = {\title, \subject, \courseNumber, \courseName, \supervisor},
+   pdftitle = {\title},
+   pdfsubject = {\subject},
+   pdfpagemode = UseNone
+ }
+
+\parindent = 0.0 in
+\parskip = 0.1 in
+
+\begin{document}
+
+
+\begin{titlepage}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Defines a new command for the horizontal lines, change thickness here
+
+\center % Center everything on the page
+ 
+%----------------------------------------------------------------------------------------
+%        HEADING SECTIONS
+%----------------------------------------------------------------------------------------
+
+\textsc{\LARGE Oregon State University}\\[1.5cm] % Name of your university/college
+\textsc{\Large \subject \courseNumber - \courseName}\\[0.5cm] % Major heading such as course name
+\textsc{\large \courseInfo}\\[0.5cm] % Minor heading such as course title
+
+%----------------------------------------------------------------------------------------
+%        TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\HRule \\[0.4cm]
+{ \huge \bfseries \title }\\[0.4cm] % Title of your document
+{\small \textit{Centos is to Android as chimpanzees are to humans}}\\[0.4cm]
+\HRule \\[1.5cm]
+ 
+%----------------------------------------------------------------------------------------
+%        AUTHOR SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{minipage}{0.4\textwidth}
+\begin{flushleft} \large
+\emph{Author:}\\
+\name
+\end{flushleft}
+\end{minipage}
+~
+\begin{minipage}{0.4\textwidth}
+\begin{flushright} \large
+\emph{Professor:} \\
+\supervisor
+\end{flushright}
+\end{minipage}\\[4cm]
+
+% If you don't want a supervisor, uncomment the two lines below and remove the section above
+%\Large \emph{Author:}\\
+%John \textsc{Smith}\\[3cm] % Your name
+
+%----------------------------------------------------------------------------------------
+%        DATE SECTION
+%----------------------------------------------------------------------------------------
+
+{\large \today}\\[3cm] % Date, change the \today to a set date if you want to be precise
+
+%----------------------------------------------------------------------------------------
+%        LOGO SECTION
+%----------------------------------------------------------------------------------------
+
+%\includegraphics{Logo}\\[1cm] % Include a department/university logo - this will require the graphicx package
+ 
+%----------------------------------------------------------------------------------------
+
+\vfill % Fill the rest of the page with whitespace
+
+\end{titlepage}
+
+\tableofcontents
+\vfill % Fill the rest of the page with whitespace
+\newpage
+
+
+\section{Introduction} 
+Did you know that Android the mobile device operating systems ancestor is Linux. According to multiple sources Android is based on Linux but Google found that for a mobile operating system some features of the kernel need to to be modified. These features include but are not limited to the CPU process scheduler, I/O scheduler, and memory allocation. This course was created for student to understand what is going on within a computer, but this final was given because students need to understand that weather you are working with android, Linux or some proprietary OS that there are benefits to you will have to weight for different feature that you need. 
+
+
+\section{Difference Between CPU Process Scheduler} 
+\subsection{My Implementation from Project 1}
+In project one we were requested to implement the Round Robin process scheduling algorithm and the First-In-First-out (FIFO) scheduler.
+
+The FIFO scheduler is concerned with throughput, latency and fairness. These often conflict but the FIFO scheduler has a suitable compromise. This is implement in a queue or a list with the typical FIFO implementation.
+
+The Round Robin scheduling algorithm has more overhead and allows shorter jobs to be completed sooner then FIFO. This is very similar to the FIFO scheduler except round robin scheduling enforces a maximum time slice called a quantum.
+
+\subsection{Android's Implementation}
+Android uses a complex tier for determining process priority (foreground process, visible process, service process, background process, empty process), however for pure process scheduling it actually uses a modified version of Linux's default Completely Fair Scheduler (CFS), red-black tree to keep track of future task execution with nanosecond time "quantum." Tasks are sorted into the red-black tree by spent processor time, then the process with the least amount of time used is selected as the next task.
+
+The CFS algorithm is based on "weighted fair queuing," originally a concept utilized in packet networks. Android uses this algorithm, but with a twist: the standard scheduler considers "niceness" of
+a process, but the Android scheduler also has the concept of background and foreground threads.
+
+
+\section{Google's Improvements over the Linux I/O Scheduler}
+One project that we were required to implement was a SSTF I/O Scheduler this project gave me an understanding of how data is accessed on a hard disk and the most efficient methods of doing so. Linux schedulers in that it is an elevator, meaning travels as far as possible in one direction before reversing direction. In some ways, SSTF is actually the simplest elevator, in that it sorts requests based on the shortest seek time. Just like in Linux there are a wide range of available I/O schedulers, but the most commonly used one is Simple I/O (SIO). This scheduler aims to keep minimum overhead to achieve low latency to serve I/O requests.  SIO is a mix between noop \& deadline with no sorting of requests. SIO has the advantages of being more reliable than more complex schedulers and minimal request starvation, but at the cost of sequential and random read speeds being relatively poor on ﬂash devices.
+
+\section{Memory Allocation Similarities between Linux and Android}
+When assigned to analyze the SLOB first fit algorithm and to implement the SLOB best fit algorithm. The first fit algorithm will find the first space in memory that the new item fits into whereas the best fit will sift through all the memory and find the smallest space in which it will fit. What we found is that the best fit sounds like you would have less fragmentation but since it will be rare to find an exact fit you will have many extremely small chunks of memory that will never be used leaving empty memory causing a higher level of fragmentation then the SLOB first fit algorithm. Overall I found that the first fit algorithm worked best for Linux. When it comes to Android you have a few different options, but Most of the Android kernels utilize SLQB allocation algorithms. The SLQB Allocation algorithms has less then linear memory consumption growth based on CPUs/nodes. SLQB is also designed to be page-size agnostic.
+
+\newpage
+\section{Group Evaluation}
+The overall contribution to team assignments all together sums to 100 and all other grades are based on the typical school grading scheme. 
+\subsection{Eric} 
+Did not care how to have a virtual machine as we had cloud 9 (a system for programming together like Google Docs but for programming)configured\\
+Attendance: B\\
+Effort: C\\
+Participation: B-\\
+Communication: D\\
+Programming skill: B+\\
+Overall Contribution to Team Assignments: 19
+\subsection{Brandon}
+Attendance: A\\
+Effort: B+\\
+Participation: B\\
+Communication: A\\
+Programming skill: B\\
+Overall Contribution to Team Assignments: 23
+\subsection{Emerson}
+Did not care to get a working copy of the virtual machine therefore he would have to wait for me to get the files up on cloud 9. When he was working in Linux he did not know things like: where terminal is located, how to us vim, or how navigate terminal.\\
+Attendance: C\\
+Effort: B+\\
+Participation: B\\
+Communication: D\\
+Programming skill: A-\\
+Overall Contribution to Team Assignments: 20
+\subsection{Drake}
+I was the team captain usually leading the meetings and ensuring that we had meetings\\
+Attendance: B\\
+Effort: A\\
+Participation: A\\
+Communication: A\\
+Programming skill: B\\
+Overall Contribution to Team Assignments: 38
+
+\newpage
+
+\section{References}
+
+\href{http://elinux.org/Master-android}{Description of android source at elinux.org}
+
+\href{http://stackoverflow.com/questions/7931032/android-process-scheduling}{stack\textbf{overflow} Android Process Scheduling} 
+
+\href{http://arxiv.org/ftp/arxiv/papers/1304/1304.7889.pdf}{Priority Based Pre-emptive Task Scheduling for Android Operating System}
+
+\href{https://www.vincentkong.com/wiki/android/android-io-schedulers/}{Android IO Schdedulers vincentkong.com}
+
+\end{document}
